@@ -7,7 +7,7 @@ import json
 today = date.today()
 
 stocksTracking = ["USO", "IXC", "UCO", "WTI", "AAL", "NCLH", "SAVE", "DIS", "APA"]
-stocksOwned = [312, 166, 66, 4, 0, 0, 0, 0, 0]
+stocksOwned = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 sData = {}
 cnt = 0
