@@ -1,0 +1,1 @@
+Used to see stock data using api.
