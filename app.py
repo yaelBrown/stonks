@@ -7,7 +7,7 @@ import json
 today = date.today()
 
 stocksTracking = ["USO", "IXC", "UCO", "WTI", "AAL", "NCLH", "SAVE", "DIS", "APA"]
-stocksOwned = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+stocksOwned = [322, 66, 124, 455, 12, 168, 70, 22, 31]
 
 sData = {}
 cnt = 0
@@ -26,12 +26,14 @@ for s in stocksTracking:
   sData[s] = {
     "close": cPrice,
     "52weekPrice": oneYear,
-    "52weekChange": cYrPrice,
+    "52weekChange": abs(cYrPrice),
     "sharesOwned": stocksOwned[cnt],
     "sharesOwnedVal": stocksOwned[cnt] * cPrice,
-    "sharesOwnedPredicted": stocksOwned[cnt] * cYrPrice,
-    "tabulateData": [s, cPrice, oneYear, cYrPrice, stocksOwned[cnt], stocksOwned[cnt] * cPrice, stocksOwned[cnt] * cYrPrice]
+    "sharesOwnedPredicted": stocksOwned[cnt] * oneYear,
   }
+  sData[s]["tabulateData"] = [s, sData[s]["close"], sData[s]["52weekPrice"], sData[s]["52weekChange"], sData[s]["sharesOwned"], sData[s]["sharesOwnedVal"], sData[s]["sharesOwnedPredicted"]]
+
+  print(f"sData[s]['52weekChange'] = {sData[s]['52weekChange']}")
   cnt += 1
 
 # tabulate
@@ -41,3 +43,10 @@ for k, v in sData.items():
   table.append(v["tabulateData"])
 
 print(tabulate(table, headers="firstrow"))
+
+# find totals
+sovSum = 0.0
+for k, v in sData.items():
+  sovSum += v["sharesOwnedVal"]
+
+print(f"total value of shares owned: {sovSum}")
